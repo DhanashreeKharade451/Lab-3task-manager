@@ -10,4 +10,5 @@ const TaskList = ({tasks, onStatusChange, onDelete}: TaskListProps) => {
 
     );
 }
+
 export default TaskList;
