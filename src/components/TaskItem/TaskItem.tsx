@@ -47,8 +47,8 @@ const TaskItem =({task, onStatusChange, onDelete}: TaskItemProps)=>{
             <div className="flex gap-2">
               <select className="px-2 py-1 rounded bg-white mx-2 bg-yellow-100 text-yellow-800">
                 <option value="pending">{task.status}</option>
-                {/* <option value="in-progress">{task.status}</option>
-                <option value="completed">{task.status}</option> */}
+                <option value="in-progress">{task.status}</option>
+                <option value="completed">{task.status}</option>
               </select>
               <button className="text-red-500 hover:text-red-700" onClick={() => onDelete(task.id)}>Delete</button>
             </div>

@@ -49,16 +49,17 @@ function App() {
     const handleStatusChange = (taskID: string, newStatus: TaskStatus) => {
       setTasks((prev) =>
       prev.map((task) =>
-      task.id === taskId ? {...task, status: newStatus} :task 
+      task.id === taskID ? {...task, status: newStatus} :task 
     )
-  )
-}
+  );
+};
 
 //Handle Delete
 const handleDelete = (taskId: string) => {
     setTasks((prev) => prev.filter((task) => task.id !== taskId));
 };
 
+//Filtering Logic: 
 const filteredTask = Tasks.filter((task) => {
   if (filters.status && task.status !== filters.status) return false;
   if (filters.priority && task.priority !== filters.priority) return false;
