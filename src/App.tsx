@@ -5,12 +5,13 @@ import "./App.css";
 
 import TaskList from "./components/TaskList/TaskList.tsx";
 
-import type { Task } from "./types";
+import type { Task, TaskStatus} from "./types";
+import { TaskFilter } from "./components/TaskFilter/TaskFilter.tsx";
 
 function App() {
-  //const [count, setCount] = useState(0)
+  const [Tasks, setTasks] = useState<Task[]>([
 
-  const textObject: Task[] = [
+  //const textObject: Task[] = [
     {
       id: "1",
       title: "title1",
@@ -35,13 +36,49 @@ function App() {
       priority: "high",
       dueDate: "",
     },
-  ];
+  ]);
+
+  const [filters,setFilters] = useState<{
+    status?: TaskStatus;
+    priority?: "low" | "medium" | "high"
+  }>({
+    
+   });
+
+    //Handle status Change
+    const handleStatusChange = (taskID: string, newStatus: TaskStatus) => {
+      setTasks((prev) =>
+      prev.map((task) =>
+      task.id === taskId ? {...task, status: newStatus} :task 
+    )
+  )
+}
+
+//Handle Delete
+const handleDelete = (taskId: string) => {
+    setTasks((prev) => prev.filter((task) => task.id !== taskId));
+};
+
+const filteredTask = Tasks.filter((task) => {
+  if (filters.status && task.status !== filters.status) return false;
+  if (filters.priority && task.priority !== filters.priority) return false;
+  return true;
+});
+
 
   return (
-    <>
-      <TaskList tasks={textObject}/>
+   
+    <div className="space-y-4">
+      <TaskFilter onFilterChange={setFilters}/>
 
-    </>
+      <TaskList 
+      tasks={filteredTask}
+      onStatusChange={handleStatusChange}
+      onDelete={handleDelete}/>
+
+      </div>
+
+  
   )
 
  
