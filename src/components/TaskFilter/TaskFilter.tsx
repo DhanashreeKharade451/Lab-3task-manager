@@ -12,14 +12,17 @@ export const TaskFilter =({onFilterChange}: TaskFilterProps)=>{
 
       onFilterChange({
           status: value === "all"? undefined : (value as TaskStatus),
-          priority: priority === "all"? undefined: (priority as any)
+          priority: priority === "all"? undefined: (priority as any),
       });
 
     };
 
     const handlePriorityChange = (value: string) => {
           setPriority(value);
-          onFilterChange
+          onFilterChange({
+            status: status === "all"? undefined : (status as TaskStatus),
+            priority: value === "all"? undefined : (value as any),
+          })
     }
 
 
