@@ -3,39 +3,7 @@ import type{ Task, TaskItemProps} from "../../types";
 const TaskItem =({task, onStatusChange, onDelete}: TaskItemProps)=>{
 
 
-    // task ="",
-    // onStatusChange ="",
-    // onDelete ="",
-    // return(
-    //     <div>
-    //         <h3>{task.title}</h3>
-    //         <p>{task.description}</p>
-            
-
-    //         <p>
-    //             <strong>Status</strong>{task.status}
-    //         </p>
-
-    //         <p>{task.priority}</p>
-
-    //         <p>
-    //             <strong>Due:</strong> 
-    //             {new Date(task.dueDate).toLocaleDateString()}
-    //         </p>
-
-    //         {/* Status Change */}
-    //         <select>
-    //             <option value = "pending">pending</option>
-    //             <option value = "in-progress">in-progress</option>
-    //             <option value = "completed">completed</option>
-    //         </select>
-
-    //         <button onClick={()=>onDelete(task.id)}
-
-    //         >Delete</button>
-    //     </div>
-    // );
-
+    
     return(
         <div className="space-y-4 m-2">
         <div className="p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow bg-white dark:bg-black dark:border-gray-700">
@@ -55,7 +23,7 @@ const TaskItem =({task, onStatusChange, onDelete}: TaskItemProps)=>{
           </div>
           <div className="mt-2 flex gap-4 text-sm">
             <span className="text-green-600">{task.priority}</span>
-            <span className="text-gray-500">Due: 12/31/2023</span>
+            <span className="text-gray-500">Due:{task.dueDate || "No Due Date"}</span>
           </div>
         </div>
         </div>
@@ -63,3 +31,5 @@ const TaskItem =({task, onStatusChange, onDelete}: TaskItemProps)=>{
 };
 
 export default TaskItem;
+
+

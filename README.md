@@ -1,3 +1,29 @@
+answers for Reflection Questions
+////////////////////////////////
+
+Q1. How did you ensure unique keys for your list items?
+Ans:
+
+{tasks.map((task) => (
+  <TaskItem key={task.id} ... />
+))}
+
+Each Task has a unique id field.
+React requires stable and unique keys for list rendering.
+Using task.id prevents rendering bugs and unnecessary re-renders.
+
+I avoided using array index (index) because:
+It can cause UI bugs when deleting or reordering items.
+It does not remain stable when list changes.
+
+Used a persistent unique identifier (id) instead of array position.
+
+**************************************************************
+Q2. What considerations did you make when implementing the filtering functionality?
+Q3. How did you handle state updates for task status changes?
+Q4. What challenges did you face when implementing conditional rendering?
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
