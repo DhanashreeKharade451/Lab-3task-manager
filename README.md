@@ -20,13 +20,70 @@ Used a persistent unique identifier (id) instead of array position.
 
 **************************************************************
 Q2. What considerations did you make when implementing the filtering functionality?
+Ans:
+const filteredTasks = tasks.filter((task) => {
+  if (filters.status && task.status !== filters.status) return false;
+  if (filters.priority && task.priority !== filters.priority) return false;
+  return true;
+});
+
+-Here I applied Filtering logic is inside App.tsx, not in TaskList,  because: tasks state lives in app.
+-In TaskFilter.tsx when user selects "all"
+status: value === "all"? undefined : value
+If filter value is undefined, we skip filtering.
+Makes filter logic clean and simple.
+
+-Multiple Filters
+Each condition is checked independently.
+
+Used .filter() which:
+Returns a new array
+Keeps original tasks intact.
+
+******************************************************
 Q3. How did you handle state updates for task status changes?
+
+Ans:
+const handleStatusChange = (taskId: string, newStatus: TaskStatus) => {
+  setTasks((prev) =>
+    prev.map((task) =>
+      task.id === taskId ? { ...task, status: newStatus } : task
+    )
+  );
+};
+
+Here I Used .map() method to Create new array , Update only the matching task and Preserve other tasks
+
+setTasks((prev) => ...)
+- This ensures ,Always works with latest state and Avoids stale state bugs.
+
+- TaskItem does NOT change state directly.
+It calls onStatusChange and Parent updates state
+
+
+********************************************************************
 Q4. What challenges did you face when implementing conditional rendering?
+Ans:
+if (tasks.length === 0) {
+  return <p>No tasks found.</p>;
+}
 
+Challenges:
+-- Needed to check filtered list, not original list.
+If filtering removes all items, message should appear.
 
+--If "all" was treated as a real value, filtering would break.
+Solution:
+Convert "all" → undefined.
+
+--select had no value, No onChange
+This caused:   
+UI not updating properly,State not syncing
+/////////////////////////////////////////////////////////////////////////////
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+-
 
 Currently, two official plugins are available:
 
